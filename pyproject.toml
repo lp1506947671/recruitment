@@ -3,7 +3,7 @@ name = "recruitment"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "lp1506947671",email = "xiaopawnye@163.com"}
+    { name = "lp1506947671", email = "xiaopawnye@163.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.10"
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "recruitment", from = "src"}]
+packages = [{ include = "recruitment", from = "src" }]
 
 
 [tool.poetry.group.dev.dependencies]
@@ -22,11 +22,16 @@ pytest = "^8.4.1"
 pytest-asyncio = "^1.0.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
-
+requires = ["poetry-core>=2.0.0,<3.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
 
 [[tool.poetry.source]]
 name = "aliyun"
 url = "https://mirrors.aliyun.com/pypi/simple/"
 
+
+[tool.poetry-dynamic-versioning]
+enable = true       # 代表启用该插件
+metadata = false      # 生成的版本号不带上其他数据
+vcs = "git"         # 指定的版本控制系统为git
+format = "v{base}"  # 指定版本号的生成规则
