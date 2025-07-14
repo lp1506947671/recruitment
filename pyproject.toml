@@ -1,6 +1,6 @@
 [project]
 name = "recruitment"
-version = "0.0.0"
+
 description = ""
 authors = [
     { name = "lp1506947671", email = "xiaopawnye@163.com" }
@@ -11,9 +11,12 @@ dependencies = [
     "django (>=5.2.4,<6.0.0)",
     "pymysql (>=1.1.1,<2.0.0)"
 ]
+dynamic = ["version"]
+
 
 [tool.poetry]
 packages = [{ include = "recruitment", from = "src" }]
+version = "0.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -22,7 +25,7 @@ pytest = "^8.4.1"
 pytest-asyncio = "^1.0.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0", "poetry-dynamic-versioning"]
+requires = ["poetry-core>=2.0.0,<3.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
 build-backend = "poetry_dynamic_versioning.backend"
 
 [[tool.poetry.source]]
@@ -32,11 +35,13 @@ url = "https://mirrors.aliyun.com/pypi/simple/"
 
 [tool.poetry-dynamic-versioning]
 enable = true       # 代表启用该插件
-metadata = false      # 生成的版本号不带上其他数据
-vcs = "git"         # 指定的版本控制系统为git
-format = "v{base}"  # 指定版本号的生成规则
+#metadata = false      # 生成的版本号不带上其他数据
+#vcs = "git"         # 指定的版本控制系统为git
+#format = "v{base}"  # 指定版本号的生成规则
 
 [tool.poetry.requires-plugins]
 poetry-plugin-export = ">=1.8" #poetry self add "poetry-plugin-export[plugins]"
 
-
+[tool.poetry.scripts]
+# ... 其他脚本 ...
+version = "poetry_dynamic_versioning.plugin:main"
