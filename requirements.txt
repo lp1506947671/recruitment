@@ -1,0 +1,8 @@
+--index-url https://mirrors.aliyun.com/pypi/simple
+
+asgiref==3.9.1 ; python_version >= "3.10"
+django==5.2.4 ; python_version >= "3.10"
+pymysql==1.1.1 ; python_version >= "3.10"
+sqlparse==0.5.3 ; python_version >= "3.10"
+typing-extensions==4.14.1 ; python_version == "3.10"
+tzdata==2025.2 ; python_version >= "3.10" and sys_platform == "win32"

@@ -1,6 +1,6 @@
 [project]
 name = "recruitment"
-version = "0.1.0"
+version = "0.0.0"
 description = ""
 authors = [
     { name = "lp1506947671", email = "xiaopawnye@163.com" }
@@ -35,3 +35,8 @@ enable = true       # 代表启用该插件
 metadata = false      # 生成的版本号不带上其他数据
 vcs = "git"         # 指定的版本控制系统为git
 format = "v{base}"  # 指定版本号的生成规则
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.8" #poetry self add "poetry-plugin-export[plugins]"
+
+

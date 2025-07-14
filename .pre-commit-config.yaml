@@ -1,0 +1,37 @@
+repos:
+  - repo: git@git.zhlh6.cn:pre-commit/mirrors-mypy
+    rev: v0.910
+    hooks:
+      - id: mypy
+  - repo: git@git.zhlh6.cn:PyCQA/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+  - repo: git@git.zhlh6.cn:psf/black
+    rev: 21.7b0
+    hooks:
+      - id: black
+  - repo: git@git.zhlh6.cn:PyCQA/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+  - repo: git@git.zhlh6.cn:myint/autoflake
+    rev: v1.4
+    hooks:
+      - id: autoflake
+        args: [ '--in-place', '--remove-all-unused-imports', '--remove-unused-variable', '--ignore-init-module-imports' ]
+  - repo: git@git.zhlh6.cn:pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-ast
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
