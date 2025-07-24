@@ -1,4 +1,8 @@
 repos:
+  - repo: git@git.zhlh6.cn:pre-commit/mirrors-mypy
+    rev: v1.16.1
+    hooks:
+      - id: mypy
   - repo: git@git.zhlh6.cn:PyCQA/isort
     rev: 6.0.1
     hooks:
@@ -7,10 +11,33 @@ repos:
     rev: 25.1.0
     hooks:
       - id: black
+  - repo: git@git.zhlh6.cn:PyCQA/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
   - repo: git@git.zhlh6.cn:myint/autoflake
     rev: v2.3.1
     hooks:
       - id: autoflake
         args: [ '--in-place', '--remove-all-unused-imports', '--remove-unused-variable', '--ignore-init-module-imports' ]
+  - repo: git@git.zhlh6.cn:pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-ast
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
 
-
+  - repo: git@git.zhlh6.cn:python-poetry/poetry
+    rev: ''  # add version here
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
