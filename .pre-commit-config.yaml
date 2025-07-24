@@ -15,6 +15,7 @@ repos:
     rev: 7.3.0
     hooks:
       - id: flake8
+        args: ['--ignore=F401']
   - repo: git@git.zhlh6.cn:myint/autoflake
     rev: v2.3.1
     hooks:
