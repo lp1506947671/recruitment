@@ -1,2 +1,3 @@
 # recruitment
-this is recruitment system
+1.创建Jobs
+2.创建超级用户

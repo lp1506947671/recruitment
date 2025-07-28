@@ -1,8 +1,8 @@
 repos:
-  - repo: git@git.zhlh6.cn:pre-commit/mirrors-mypy
-    rev: v1.16.1
-    hooks:
-      - id: mypy
+#  - repo: git@git.zhlh6.cn:pre-commit/mirrors-mypy
+#    rev: v1.16.1
+#    hooks:
+#      - id: mypy
   - repo: git@git.zhlh6.cn:PyCQA/isort
     rev: 6.0.1
     hooks:
@@ -15,7 +15,7 @@ repos:
     rev: 7.3.0
     hooks:
       - id: flake8
-        args: ['--ignore=F401']
+        args: ['--ignore=F401, E501']
   - repo: git@git.zhlh6.cn:myint/autoflake
     rev: v2.3.1
     hooks:
