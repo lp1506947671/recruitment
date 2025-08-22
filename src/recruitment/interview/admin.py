@@ -4,6 +4,7 @@ from interview.models import Candidate
 
 # Register your models here.
 class CandidateAdmin(admin.ModelAdmin):
+
     exclude = ("creator", "created_date", "modified_date")
     list_display = (
         "username",
@@ -18,6 +19,81 @@ class CandidateAdmin(admin.ModelAdmin):
         "hr_score",
         "hr_result",
         "hr_interviewer_user",
+    )
+    fieldsets = (
+        (
+            "基础信息",
+            {
+                "fields": (
+                    "username",
+                    "city",
+                    "phone",
+                    "email",
+                    "apply_position",
+                    "gender",
+                    "candidate_remark",
+                    "bachelor_school",
+                    "master_school",
+                    "doctor_school",
+                    "major",
+                    "degree",
+                    "test_score_of_general_ability",
+                    "last_editor",
+                )
+            },
+        ),
+        (
+            "一面信息",
+            {
+                "fields": (
+                    "first_score",
+                    "first_learning_ability",
+                    "first_professional_competency",
+                    "first_advantage",
+                    "first_result",
+                    "first_recommend_position",
+                    "first_interviewer_user",
+                    "first_remark",
+                )
+            },
+        ),
+        (
+            "二面信息",
+            {
+                "fields": (
+                    "second_score",
+                    "second_learning_ability",
+                    "second_professional_competency",
+                    "second_pursue_of_excellence",
+                    "second_communication_ability",
+                    "second_pressure_score",
+                    "second_advantage",
+                    "second_disadvantage",
+                    "second_result",
+                    "second_recommend_position",
+                    "second_interviewer_user",
+                    "second_remark",
+                )
+            },
+        ),
+        (
+            "HR面试信息",
+            {
+                "fields": (
+                    "hr_score",
+                    "hr_responsibility",
+                    "hr_communication_ability",
+                    "hr_logic_ability",
+                    "hr_potential",
+                    "hr_stability",
+                    "hr_advantage",
+                    "hr_disadvantage",
+                    "hr_result",
+                    "hr_interviewer_user",
+                    "hr_remark",
+                )
+            },
+        ),
     )
 
 
