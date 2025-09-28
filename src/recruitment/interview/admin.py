@@ -4,6 +4,26 @@ from interview.models import Candidate
 
 # Register your models here.
 class CandidateAdmin(admin.ModelAdmin):
+    # 右侧筛选条件
+    list_filter = (
+        "city",
+        "first_result",
+        "second_result",
+        "hr_result",
+        "first_interviewer_user",
+        "second_interviewer_user",
+        "hr_interviewer_user",
+    )
+
+    # 查询字段
+    search_fields = ("username", "phone", "email", "bachelor_school")
+
+    # 列表页排序字段
+    ordering = (
+        "hr_result",
+        "second_result",
+        "first_result",
+    )
 
     exclude = ("creator", "created_date", "modified_date")
     list_display = (

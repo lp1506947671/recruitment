@@ -5,7 +5,10 @@ from interview.models import Candidate
 
 
 class Command(BaseCommand):
-    # python manage.py import_candidates --path /path/to/your/file.csv
+    """
+    python manage.py import_candidates --path /path/to/your/file.csv
+    """
+
     help = "导入候选人数据"
 
     def add_arguments(self, parser):
