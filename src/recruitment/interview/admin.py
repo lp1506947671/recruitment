@@ -1,9 +1,64 @@
+import codecs
+import csv
+from datetime import datetime
+
 from django.contrib import admin
+from django.http import HttpResponse
 from interview.models import Candidate
+
+exportable_fields = (
+    "username",
+    "city",
+    "phone",
+    "bachelor_school",
+    "master_school",
+    "degree",
+    "first_result",
+    "first_interviewer_user",
+    "second_result",
+    "second_interviewer_user",
+    "hr_result",
+    "hr_score",
+    "hr_remark",
+    "hr_interviewer_user",
+)
+
+
+def export_model_as_csv(modeladmin, request, queryset):
+    response = HttpResponse(content_type="text/csv; charset=utf-8")
+    response["Content-Disposition"] = "attachment; filename=%s-list-%s.csv" % (
+        "recruitment-candidates",
+        datetime.now().strftime("%Y-%m-%d-%H-%M-%S"),
+    )
+    response.write(codecs.BOM_UTF8)
+
+    field_list = exportable_fields
+    # 写入表头
+    writer = csv.writer(response)
+    writer.writerow(
+        [queryset.model._meta.get_field(f).verbose_name.title() for f in field_list],
+    )
+    for obj in queryset:
+        csv_line_values = []
+        for field in field_list:
+            field_object = queryset.model._meta.get_field(field)
+            field_value = field_object.value_from_object(obj)
+            # 修复3：确保字符串字段使用UTF-8编码
+            if isinstance(field_value, str):
+                csv_line_values.append(field_value)
+            else:
+                csv_line_values.append(str(field_value))
+        writer.writerow(csv_line_values)
+
+    return response
+
+
+export_model_as_csv.short_description = "导出为CSV文件"
 
 
 # Register your models here.
 class CandidateAdmin(admin.ModelAdmin):
+    actions = (export_model_as_csv,)
     # 右侧筛选条件
     list_filter = (
         "city",
