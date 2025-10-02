@@ -1,10 +1,13 @@
 import codecs
 import csv
+import logging
 from datetime import datetime
 
 from django.contrib import admin
 from django.http import HttpResponse
 from interview.models import Candidate
+
+logger = logging.getLogger("operate_logger")
 
 exportable_fields = (
     "username",
@@ -49,7 +52,9 @@ def export_model_as_csv(modeladmin, request, queryset):
             else:
                 csv_line_values.append(str(field_value))
         writer.writerow(csv_line_values)
-
+    logger.info(
+        " %s has exported %s candidate records" % (request.user.username, len(queryset))
+    )
     return response
 
 
