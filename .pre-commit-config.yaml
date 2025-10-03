@@ -7,10 +7,6 @@ repos:
     rev: 6.0.1
     hooks:
       - id: isort
-  - repo: git@git.zhlh6.cn:psf/black
-    rev: 25.1.0
-    hooks:
-      - id: black
   - repo: git@git.zhlh6.cn:PyCQA/flake8
     rev: 7.3.0
     hooks:
