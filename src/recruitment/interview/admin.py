@@ -63,6 +63,38 @@ export_model_as_csv.short_description = "导出为CSV文件"
 
 # Register your models here.
 class CandidateAdmin(admin.ModelAdmin):
+
+    @staticmethod
+    def get_group_names(user):
+        group_names = []
+        for g in user.groups.all():
+            group_names.append(g.name)
+        return group_names
+
+    def get_readonly_fields(self, request, obj=None):
+        group_names = self.get_group_names(request.user)
+
+        if "interviewer" in group_names:
+            return (
+                "first_interviewer_user",
+                "second_interviewer_user",
+            )
+        return ()
+
+    def get_list_editable(self, request):
+        group_names = self.get_group_names(request.user)
+
+        if request.user.is_superuser or "hr" in group_names:
+            return (
+                "first_interviewer_user",
+                "second_interviewer_user",
+            )
+        return ()
+
+    def get_changelist_instance(self, request):
+        self.list_editable = self.get_list_editable(request)
+        return super(CandidateAdmin, self).get_changelist_instance(request)
+
     actions = (export_model_as_csv,)
     # 右侧筛选条件
     list_filter = (

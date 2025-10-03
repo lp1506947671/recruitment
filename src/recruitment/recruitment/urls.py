@@ -22,3 +22,5 @@ urlpatterns = [
     path(r"", include("jobs.urls")),
     path("admin/", admin.site.urls),
 ]
+
+admin.site.site_header = "匠果科技招聘管理系统"

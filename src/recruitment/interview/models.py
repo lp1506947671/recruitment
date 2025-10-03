@@ -101,6 +101,7 @@ class Candidate(models.Model):
     first_recommend_position = models.CharField(
         max_length=256, blank=True, verbose_name="推荐部门"
     )
+    # 一面面试官
     first_interviewer_user = models.ForeignKey(
         User,
         related_name="first_interviewer_user",
@@ -171,6 +172,7 @@ class Candidate(models.Model):
     second_recommend_position = models.CharField(
         max_length=256, blank=True, verbose_name="建议方向或推荐部门"
     )
+    # 二面面试官
     second_interviewer_user = models.ForeignKey(
         User,
         related_name="second_interviewer_user",
@@ -178,6 +180,7 @@ class Candidate(models.Model):
         null=True,
         on_delete=models.CASCADE,
         verbose_name="二面面试官",
+        help_text="1-5分，极优秀: >=4.5，优秀: 4-4.4，良好: 3.5-3.9，一般: 3-3.4，较差: <3分",
     )
     second_remark = models.CharField(
         max_length=135, blank=True, verbose_name="专业复试备注"
@@ -212,6 +215,7 @@ class Candidate(models.Model):
         blank=True,
         verbose_name="HR复试结果",
     )
+    # hr面试官
     hr_interviewer_user = models.ForeignKey(
         User,
         related_name="hr_interviewer_user",
