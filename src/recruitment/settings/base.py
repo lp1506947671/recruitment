@@ -208,3 +208,5 @@ LOGGING = {
         },
     },
 }
+
+DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=92e75f203f0639941cbc942903c7e5ecdf7b109cbb5e6e18658d34886a2158ad"
