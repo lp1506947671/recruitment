@@ -3,10 +3,11 @@ import csv
 import logging
 from datetime import datetime
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db.models import Q
 from django.http import HttpResponse
 from interview import candidate_field as cf
+from interview import dingtalk
 from interview.models import Candidate
 
 logger = logging.getLogger("operate_logger")
@@ -62,6 +63,25 @@ def export_model_as_csv(modeladmin, request, queryset):
 
 export_model_as_csv.short_description = "导出为CSV文件"
 export_model_as_csv.allowed_permissions = ("export",)
+
+
+# 通知一面面试官面试
+def notify_interviewer(modeladmin, request, queryset):
+    candidates = ""
+    interviewers = ""
+    for obj in queryset:
+        candidates = obj.username + ";" + candidates
+        interviewers = obj.first_interviewer_user.username + ";" + interviewers
+    # 这里的消息发送到钉钉， 或者通过 Celery 异步发送到钉钉
+    # send ("候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s" % (candidates, interviewers) )
+    dingtalk.send(
+        "候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s"
+        % (candidates, interviewers)
+    )
+    messages.add_message(request, messages.INFO, "已经成功发送面试通知")
+
+
+notify_interviewer.short_description = "通知一面面试官"
 
 
 # Register your models here.
@@ -124,7 +144,7 @@ class CandidateAdmin(admin.ModelAdmin):
             | Q(second_interviewer_user=request.user)
         )
 
-    actions = (export_model_as_csv,)
+    actions = (export_model_as_csv, notify_interviewer)
     # 右侧筛选条件
     list_filter = (
         "city",
