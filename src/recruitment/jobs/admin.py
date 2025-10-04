@@ -1,7 +1,7 @@
 # Register your models here.
 from django.contrib import admin
 
-from .models import Job
+from .models import Job, Resume
 
 
 class JobAdmin(admin.ModelAdmin):
@@ -22,5 +22,4 @@ class JobAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Job, JobAdmin)
-
-#
+admin.site.register(Resume)

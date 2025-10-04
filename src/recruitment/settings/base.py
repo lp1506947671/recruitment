@@ -211,7 +211,7 @@ LOGGING = {
 }
 
 # 登陆后跳转首页
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/joblist/"
 
 # 注册后跳转登陆
 SIMPLE_BACKEND_REDIRECT_URL = "/accounts/login/"
