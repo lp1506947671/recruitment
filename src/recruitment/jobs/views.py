@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from .forms import ResumeForm
 from .models import JOB_TYPES, Cities, Job, Resume
@@ -73,3 +73,10 @@ class ResumeCreateView(LoginRequiredMixin, CreateView):
         self.object.applicant = self.request.user
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class ResumeDetailView(DetailView):
+    """简历详情页"""
+
+    model = Resume
+    template_name = "resume_detail.html"

@@ -6,9 +6,11 @@ from datetime import datetime
 from django.contrib import admin, messages
 from django.db.models import Q
 from django.http import HttpResponse
+from django.utils.safestring import mark_safe
 from interview import candidate_field as cf
 from interview import dingtalk
 from interview.models import Candidate
+from jobs.models import Resume
 
 logger = logging.getLogger("operate_logger")
 
@@ -86,6 +88,20 @@ notify_interviewer.short_description = "通知一面面试官"
 
 # Register your models here.
 class CandidateAdmin(admin.ModelAdmin):
+    def get_resume(self, obj):
+        if not obj.phone:
+            return ""
+        resumes = Resume.objects.filter(phone=obj.phone)
+        if resumes and len(resumes) > 0:
+            return mark_safe(
+                '<a href="/resume/%s" target="_blank">%s</a'
+                % (resumes[0].id, "查看简历")
+            )
+        return ""
+
+    get_resume.short_description = "查看简历"
+    get_resume.allow_tags = True
+
     # 当前用户是否有导出权限：
     def has_export_permission(self, request):
         opts = self.opts
@@ -171,6 +187,7 @@ class CandidateAdmin(admin.ModelAdmin):
         "username",
         "city",
         "bachelor_school",
+        "get_resume",
         "first_score",
         "first_result",
         "first_interviewer_user",
