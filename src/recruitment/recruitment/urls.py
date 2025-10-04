@@ -19,9 +19,10 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("accounts/", include("registration.backends.simple.urls")),
     path("grappelli/", include("grappelli.urls")),
     path(r"", include("jobs.urls")),
-    path("admin/", admin.site.urls),
 ]
 
 admin.site.site_header = "匠果科技招聘管理系统"

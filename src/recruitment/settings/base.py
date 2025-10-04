@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "grappelli",
+    "registration",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -209,4 +210,8 @@ LOGGING = {
     },
 }
 
-DINGTALK_WEB_HOOK = "https://oapi.dingtalk.com/robot/send?access_token=92e75f203f0639941cbc942903c7e5ecdf7b109cbb5e6e18658d34886a2158ad"
+# 登陆后跳转首页
+LOGIN_REDIRECT_URL = "/"
+
+# 注册后跳转登陆
+SIMPLE_BACKEND_REDIRECT_URL = "/accounts/login/"
