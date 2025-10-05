@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_python3_ldap",
+    "rest_framework",
     "jobs",
     "interview",
 ]
@@ -217,3 +218,12 @@ LOGIN_REDIRECT_URL = "/joblist/"
 
 # 注册后跳转登陆
 SIMPLE_BACKEND_REDIRECT_URL = "/accounts/login/"
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
+}
