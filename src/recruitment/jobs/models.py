@@ -4,6 +4,10 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from registration.models import RegistrationProfile
+
+RegistrationProfile._meta.verbose_name = "注册"
+RegistrationProfile._meta.verbose_name_plural = "注册"
 
 JOB_TYPES = [
     (0, "技术类"),
