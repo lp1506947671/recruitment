@@ -8,9 +8,10 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.utils.safestring import mark_safe
 from interview import candidate_field as cf
-from interview import dingtalk
 from interview.models import Candidate
 from jobs.models import Resume
+
+from .tasks import send_dingtalk_message
 
 logger = logging.getLogger("operate_logger")
 
@@ -75,8 +76,8 @@ def notify_interviewer(modeladmin, request, queryset):
         candidates = obj.username + ";" + candidates
         interviewers = obj.first_interviewer_user.username + ";" + interviewers
     # 这里的消息发送到钉钉， 或者通过 Celery 异步发送到钉钉
-    # send ("候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s" % (candidates, interviewers) )
-    dingtalk.send(
+
+    send_dingtalk_message.delay(
         "候选人 %s 进入面试环节，亲爱的面试官，请准备好面试： %s"
         % (candidates, interviewers)
     )

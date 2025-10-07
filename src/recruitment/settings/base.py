@@ -227,3 +227,16 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ]
 }
+
+
+CELERY_BROKER_URL = "redis://192.168.190.2:6379/1"
+CELERY_RESULT_BACKEND = "redis://192.168.190.2:6379/2"
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TASK_SERIALIZER = "json"
+CELERY_TIMEZONE = "Asia/Shanghai"
+CELERYD_MAX_TASKS_PER_CHILD = 10
+CELERYD_LOG_FILE = os.path.join(LOG_DIR, "celery_work.log")
+CELERYBEAT_LOG_FILE = os.path.join(LOG_DIR, "celery_beat.log")
+CELERYD_LOG_LEVEL = "INFO"
+CELERYBEAT_LOG_LEVEL = "INFO"
