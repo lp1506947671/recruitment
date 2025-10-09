@@ -241,3 +241,6 @@ CELERYD_LOG_FILE = os.path.join(LOG_DIR, "celery_work.log")
 CELERYBEAT_LOG_FILE = os.path.join(LOG_DIR, "celery_beat.log")
 CELERYD_LOG_LEVEL = "INFO"
 CELERYBEAT_LOG_LEVEL = "INFO"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
