@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django_oss_storage",
     "jobs",
     "interview",
+    "running",
 ]
 
 MIDDLEWARE = [
@@ -250,3 +251,4 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+DATABASE_ROUTERS = ["settings.router.DatabaseRouter"]
