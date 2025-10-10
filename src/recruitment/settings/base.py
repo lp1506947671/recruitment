@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_python3_ldap",
     "django_celery_beat",
     "rest_framework",
+    "django_oss_storage",
     "jobs",
     "interview",
 ]
@@ -220,7 +221,6 @@ LOGIN_REDIRECT_URL = "/joblist/"
 # 注册后跳转登陆
 SIMPLE_BACKEND_REDIRECT_URL = "/accounts/login/"
 
-
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -228,7 +228,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ]
 }
-
 
 CELERY_BROKER_URL = "redis://192.168.190.2:6379/1"
 CELERY_RESULT_BACKEND = "redis://192.168.190.2:6379/2"
@@ -242,5 +241,12 @@ CELERYBEAT_LOG_FILE = os.path.join(LOG_DIR, "celery_beat.log")
 CELERYD_LOG_LEVEL = "INFO"
 CELERYBEAT_LOG_LEVEL = "INFO"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+STORAGES = {
+    "default": {
+        "BACKEND": "django_oss_storage.backends.OssMediaStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
