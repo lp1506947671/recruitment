@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "django_oss_storage",
     "jobs",
     "interview",
-    "running",
+    "running.apps.RunningConfig",
 ]
 
 MIDDLEWARE = [
