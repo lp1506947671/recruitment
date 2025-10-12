@@ -252,3 +252,15 @@ STORAGES = {
     },
 }
 DATABASE_ROUTERS = ["settings.router.DatabaseRouter"]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+STATIC_ROOT = BASE_DIR.parent / "static"
+STATIC_URL = "/static/"
+
+MEDIA_ROOT = BASE_DIR.parent / "media"
+MEDIA_URL = "/media/"
+
+# python manage.py collectstatic --settings=settings.local
+# python manage.py check --deploy

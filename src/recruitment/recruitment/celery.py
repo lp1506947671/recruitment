@@ -14,11 +14,10 @@ DJANGO_SETTINGS_MODULE=settings.local celery --app recruitment worker -l info -P
 import json
 import os
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.local")
+
 from celery import Celery
 from celery.schedules import crontab
-from django_celery_beat.models import IntervalSchedule, PeriodicTask
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.local")
 
 app = Celery("recruitment")
 app.config_from_object("django.conf:settings", namespace="CELERY")
@@ -45,6 +44,8 @@ app.conf.beat_schedule = {
 
 
 def dynamic_create_task(name, task, args, schedule):
+    from django_celery_beat.models import IntervalSchedule, PeriodicTask
+
     # 1.创建定时策略
     schedule, created = IntervalSchedule.objects.get_or_create(
         every=10, period=IntervalSchedule.SECONDS
