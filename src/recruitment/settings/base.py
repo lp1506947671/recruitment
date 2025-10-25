@@ -253,8 +253,6 @@ STORAGES = {
 }
 DATABASE_ROUTERS = ["settings.router.DatabaseRouter"]
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 STATIC_ROOT = BASE_DIR.parent / "static"
 STATIC_URL = "/static/"
