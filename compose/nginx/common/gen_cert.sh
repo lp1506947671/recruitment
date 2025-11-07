@@ -9,9 +9,9 @@ openssl genrsa -out recruitment.key 2048
 #网站的公钥(Certificate Signing Request)CSR包括了你的网站的公钥，以及你网站相关的信息。
 openssl req -new -key recruitment.key -out recruitment.csr
 # 查看CSR文件信息
-openssl req -text -noout -verify -in my-website.csr
+openssl req -text -noout -verify -in recruitment.csr
 
-# ca对csr文件进行签名
+# ca对csr文件进行签名生成证书文件CRT发给证书申请者
 openssl x509 -req -in recruitment.csr -CA ./ca.crt -CAkey ./ca.key -set_serial 01 -out recruitment.crt -days 365
 
 #查看证书
