@@ -10,14 +10,13 @@ RUN mkdir -p /usr/share/nginx/html/static \
 # 设置Media文件夹用户和用户组为Linux默认www-data, 并给予可读和可执行权限,
 # 否则用户上传的图片无法正确显示。
 RUN chown -R www-data:www-data /usr/share/nginx/html/media \
-&& chmod -R 775 /usr/share/nginx/html/media
+&& chmod -R 775 /usr/share/nginx/html/media \
+ && chmod -R 775 /usr/share/nginx/ssl
 
 # 添加配置文件
-ADD ./nginx.conf /etc/nginx/nginx.conf
+ADD ./nginx.conf /etc/nginx/conf.d/
 
 EXPOSE 80 443
 
 # 关闭守护模式
-# 在Dockerfile中修改启动命令
-CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
-
+CMD ["nginx", "-g", "daemon off;"]
