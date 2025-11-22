@@ -8,4 +8,38 @@ services:
       - ./compose/redis/redis.conf:/etc/redis/redis.conf
 
 
+  mariadb_master:
+    image: mariadb
+    container_name: mariadb_master
+    env_file:
+      - ./compose/db/env/.env # 使用了环境变量文件
+
+    network_mode: host  # 设置为host网络模式
+    volumes:
+      - ./compose/db/data/master:/var/lib/mysql:rw # 挂载数据库数据, 可读可写
+      - ./compose/db/conf/master.cnf:/etc/mysql/my.cnf # 挂载配置文件
+      - ./compose/db/init/init.sql:/docker-entrypoint-initdb.d/init.sql # 挂载数据初始化sql脚本
+
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+
+  mariadb_slave:
+    image: mariadb
+    container_name: mariadb_slave
+    env_file:
+      - ./compose/db/env/.env # 使用了环境变量文件
+    network_mode: host  # 设置为host网络模式
+    volumes:
+      - ./compose/db/data/slave:/var/lib/mysql:rw # 挂载数据库数据, 可读可写
+      - ./compose/db/conf/slave.cnf:/etc/mysql/my.cnf # 挂载配置文件
+      - ./compose/db/init/init.sql:/docker-entrypoint-initdb.d/init.sql # 挂载数据初始化sql脚本
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+
 
